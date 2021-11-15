@@ -2,7 +2,18 @@
   "name": "utils",
   "version": "0.0.1",
   "main": "main.ts",
-  "scripts": {},
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch './**/*.ts' --exec \"ts-node\" ./main.ts"
+  },
   "author": "cole",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
 }
