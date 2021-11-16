@@ -74,7 +74,7 @@
 
    ```json
    "scripts": {
-       "build:live": "nodemon --watch './**/*.ts' --exec 'ts-node -r tsconfig-paths/register' main.ts"
+       "build:live": "nodemon --watch './**/*.ts' --exec \"ts-node -r tsconfig-paths/register\" main.ts"
    },
    "devDependencies": {
        "tsconfig-paths": "^3.11.0",
