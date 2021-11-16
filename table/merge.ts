@@ -1,5 +1,7 @@
 import { deepClone } from "@/index";
 
+const _this = this;
+
 export interface Rule<R, T> {
   field: string;
   customRule?: (currentRule: R, currentTableDataIndex: number, tableData: T[]) => boolean;
@@ -12,7 +14,7 @@ export interface Rule<R, T> {
  * @param tableData
  * @returns
  */
-export const merge = <R extends Rule<R, T>, T>(rules: R[], tableData: T[]) => {
+export function merge<R extends Rule<R, T>, T>(rules: R[], tableData: T[]) {
   // 行合并数组
   let rowSpan: number[][] = rules.map(() => []);
   // 当前位置
@@ -31,7 +33,7 @@ export const merge = <R extends Rule<R, T>, T>(rules: R[], tableData: T[]) => {
         if (typeof rule.customRule === "function") {
           // 自定义规则
           // 该项能否与上一项合并
-          canMerge = rule.customRule.call(this, rule, dataIndex, tableData);
+          canMerge = rule.customRule.call(_this, rule, dataIndex, tableData);
         } else {
           // 比较本条数据中该字段与上条数据该字段
           canMerge = data[field] === dataOrigin[dataIndex - 1][field];
@@ -49,6 +51,26 @@ export const merge = <R extends Rule<R, T>, T>(rules: R[], tableData: T[]) => {
     }
   });
   return rules.map((rule, ruleIndex) => {
-    return { rule: deepClone(rule), rowSpan: rowSpan[ruleIndex] };
+    return { ...deepClone(rule), rowSpan: rowSpan[ruleIndex] };
   });
-};
+}
+
+/**
+ * 获取某行根据rules合并的行数据
+ * @param row
+ * @param rule
+ * @param tableData
+ * @param deep
+ * @returns
+ */
+export function getNearbyMerged<R extends Rule<R, T>, T>(row: T, rule: R, tableData: T[], deep = false): T[] {
+  // 当前数据的index
+  const rowIndex = tableData.indexOf(row);
+  if (rowIndex > -1) {
+    let result = merge([rule], tableData);
+    // 当前数据合并的行数
+    const rowSpan = result[0].rowSpan[rowIndex];
+    return deepClone(tableData.slice(rowIndex + 1, rowIndex + rowSpan), deep);
+  }
+  return [];
+}
