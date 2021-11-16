@@ -1,5 +1,8 @@
 import { deepClone } from "@/index";
 
+/**
+ * 根据page, size做分页, page从0开始
+ */
 export class Paging<T> {
   private _raw: T[];
   public deep: boolean;
