@@ -1,12 +1,25 @@
-export default class Paging<T> {
-  private _raw: T[];
+import { deepClone } from "@/index";
 
-  constructor() {
-    this._raw = [];
+export class Paging<T> {
+  private _raw: T[];
+  public deep: boolean;
+
+  constructor();
+  constructor(raw?: T[], deep?: boolean) {
+    if (Array.isArray(raw)) {
+      this._raw = raw;
+    } else {
+      this._raw = [];
+    }
+    if (typeof deep == "boolean") {
+      this.deep = deep;
+    } else {
+      this.deep = false;
+    }
   }
 
   get raw() {
-    return this._raw;
+    return deepClone(this._raw, this.deep);
   }
 
   set(raw: T[] | undefined = []) {
@@ -21,7 +34,7 @@ export default class Paging<T> {
       curPage: 0,
       totalElements: this._raw.length,
       totalPage: 1,
-      item: this._raw,
+      item: deepClone(this._raw, this.deep),
     };
   }
 
@@ -35,7 +48,7 @@ export default class Paging<T> {
       item = [];
       curPage = page;
     } else {
-      item = [...this._raw.slice(page * size, (page + 1) * size)];
+      item = deepClone(this._raw.slice(page * size, (page + 1) * size), this.deep);
       curPage = page;
     }
     return {
