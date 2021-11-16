@@ -1,4 +1,4 @@
-import { deepClone } from "@/index";
+import { clone } from "@/index";
 
 const _this = this;
 
@@ -51,7 +51,7 @@ export function merge<R extends Rule<R, T>, T>(rules: R[], tableData: T[]) {
     }
   });
   return rules.map((rule, ruleIndex) => {
-    return { ...deepClone(rule), rowSpan: rowSpan[ruleIndex] };
+    return { ...clone(rule), rowSpan: rowSpan[ruleIndex] };
   });
 }
 
@@ -70,7 +70,7 @@ export function getNearbyMerged<R extends Rule<R, T>, T>(row: T, rule: R, tableD
     let result = merge([rule], tableData);
     // 当前数据合并的行数
     const rowSpan = result[0].rowSpan[rowIndex];
-    return deepClone(tableData.slice(rowIndex + 1, rowIndex + rowSpan), deep);
+    return clone(tableData.slice(rowIndex + 1, rowIndex + rowSpan), deep);
   }
   return [];
 }

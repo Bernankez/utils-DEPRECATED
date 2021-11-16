@@ -1,4 +1,4 @@
-import { deepClone } from "@/index";
+import { clone } from "@/index";
 
 /**
  * 根据page, size做分页, page从0开始
@@ -22,7 +22,7 @@ export class Paging<T> {
   }
 
   get raw() {
-    return deepClone(this._raw, this.deep);
+    return clone(this._raw, this.deep);
   }
 
   set(raw: T[] | undefined = []) {
@@ -37,7 +37,7 @@ export class Paging<T> {
       curPage: 0,
       totalElements: this._raw.length,
       totalPage: 1,
-      item: deepClone(this._raw, this.deep),
+      item: clone(this._raw, this.deep),
     };
   }
 
@@ -51,7 +51,7 @@ export class Paging<T> {
       item = [];
       curPage = page;
     } else {
-      item = deepClone(this._raw.slice(page * size, (page + 1) * size), this.deep);
+      item = clone(this._raw.slice(page * size, (page + 1) * size), this.deep);
       curPage = page;
     }
     return {

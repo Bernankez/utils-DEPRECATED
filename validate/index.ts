@@ -1,6 +1,4 @@
 // refer to https://github.com/youzan/vant/blob/HEAD/packages/vant/src/utils/validate.ts
-export * from "./deep-clone";
-
 export const isDefined = <T>(val: T): val is NonNullable<T> => val !== undefined && val !== null;
 
 export const isFunction = (val: unknown): val is Function => typeof val === "function";
