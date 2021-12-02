@@ -8,13 +8,16 @@ export class Paging<T> {
   public deep: boolean;
 
   constructor();
-  constructor(raw?: T[], deep?: boolean) {
+  constructor(deep?: boolean);
+  constructor(raw?: T[] | boolean, deep?: boolean) {
     if (Array.isArray(raw)) {
       this._raw = raw;
     } else {
       this._raw = [];
     }
-    if (typeof deep == "boolean") {
+    if (typeof raw === "boolean") {
+      this.deep = raw;
+    } else if (typeof deep == "boolean") {
       this.deep = deep;
     } else {
       this.deep = false;
