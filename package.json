@@ -6,7 +6,7 @@
     "start": "npm run dev",
     "dev": "npm run build:live",
     "build": "tsc -p .",
-    "build:live": "nodemon --watch './**/*.ts' --exec \"ts-node -r tsconfig-paths/register\" main.ts"
+    "build:live": "nodemon --watch ./**/*.ts --exec \"ts-node -r tsconfig-paths/register\" main.ts"
   },
   "author": "cole",
   "license": "MIT",

@@ -24,7 +24,7 @@
        "start": "npm run dev",
        "dev": "npm run build:live",
        "build": "tsc -p .",
-       "build:live": "nodemon --watch './**/*.ts' --exec \"ts-node\" ./main.ts"
+       "build:live": "nodemon --watch ./**/*.ts --exec \"ts-node\" ./main.ts"
    },
    "devDependencies": {
        "@types/node": "^16.11.7",
@@ -74,7 +74,7 @@
 
    ```json
    "scripts": {
-       "build:live": "nodemon --watch './**/*.ts' --exec \"ts-node -r tsconfig-paths/register\" main.ts"
+       "build:live": "nodemon --watch ./**/*.ts --exec \"ts-node -r tsconfig-paths/register\" main.ts"
    },
    "devDependencies": {
        "tsconfig-paths": "^3.11.0",
