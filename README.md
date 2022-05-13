@@ -21,10 +21,11 @@
 
    ```json
    "scripts": {
-       "start": "npm run dev",
-       "dev": "npm run build:live",
+       "dev:mac": "npm run build:mac",
+       "dev:windows": "npm run build:windows",
        "build": "tsc -p .",
-       "build:live": "nodemon --watch ./**/*.ts --exec \"ts-node\" ./main.ts"
+       "build:mac": "nodemon --watch './**/*.ts' --exec \"ts-node\" ./main.ts",
+       "build:windows": "nodemon --watch ./**/*.ts --exec \"ts-node\" ./main.ts",
    },
    "devDependencies": {
        "@types/node": "^16.11.7",
@@ -74,14 +75,15 @@
 
    ```json
    "scripts": {
-       "build:live": "nodemon --watch ./**/*.ts --exec \"ts-node -r tsconfig-paths/register\" main.ts"
+       "build:mac": "nodemon --watch './**/*.ts' --exec \"ts-node -r tsconfig-paths/register\" main.ts",
+       "build:windows": "nodemon --watch ./**/*.ts --exec \"ts-node -r tsconfig-paths/register\" main.ts"
    },
    "devDependencies": {
        "tsconfig-paths": "^3.11.0",
    }
    ```
 
-5. 此时运行```npm start```已经可以监测改动并实时编译。
+5. 此时运行`npm run dev:mac`或`npm run dev:windows`已经可以监测改动并实时编译。
 
 ***
 

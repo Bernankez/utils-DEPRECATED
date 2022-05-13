@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "main": "main.ts",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "npm run build:live",
+    "dev:mac": "npm run build:mac",
+    "dev:windows": "npm run build:windows",
     "build": "tsc -p .",
-    "build:live": "nodemon --watch ./**/*.ts --exec \"ts-node -r tsconfig-paths/register\" main.ts"
+    "build:mac": "nodemon --watch './**/*.ts' --exec \"ts-node -r tsconfig-paths/register\" main.ts",
+    "build:windows": "nodemon --watch ./**/*.ts --exec \"ts-node -r tsconfig-paths/register\" main.ts"
   },
   "author": "cole",
   "license": "MIT",
