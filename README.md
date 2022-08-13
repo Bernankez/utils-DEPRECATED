@@ -1,3 +1,7 @@
+# 迁移至[VueDemo](https://github.com/Bernankez/VueDemo)
+
+***
+
 # utils
 
 建这个仓库起因是想记录一下平常经常用到的方法并提取成utils工具函数。不想搞得太复杂所以选择搭建纯Node + TypeScript环境。记录一下搭建过程及遇到的坑。
